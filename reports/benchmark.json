@@ -1,0 +1,98 @@
+{
+  "dataset": "NHTSA FARS 2023 National final release, accident.csv",
+  "estimand": "Among crashes in the FARS fatal-crash census, classify whether at least two people died.",
+  "rows": {
+    "eligible": 37769,
+    "train_jan_sep": 27962,
+    "test_oct_dec": 9807
+  },
+  "target_prevalence": {
+    "train": 0.0716329304055504,
+    "test": 0.06505557255021924
+  },
+  "model": "Class-weighted logistic regression, one-hot encoded context features",
+  "features": [
+    "STATE",
+    "DAY_WEEK",
+    "HOUR",
+    "RUR_URB",
+    "FUNC_SYS",
+    "ROUTE",
+    "RELJCT1",
+    "RELJCT2",
+    "TYP_INT",
+    "REL_ROAD",
+    "WRK_ZONE",
+    "LGT_COND",
+    "WEATHER",
+    "SCH_BUS",
+    "RAIL",
+    "MONTH"
+  ],
+  "excluded": [
+    "ST_CASE",
+    "FATALS",
+    "PERSONS",
+    "PERMVIT",
+    "PEDS",
+    "PERNOTMVIT",
+    "coordinates",
+    "post-crash response/injury fields"
+  ],
+  "test_metrics_at_threshold_0_5": {
+    "average_precision": 0.09985204699063804,
+    "roc_auc": 0.6342692136615439,
+    "brier_score": 0.22679993375139101,
+    "balanced_accuracy": 0.6044304424989342,
+    "precision": 0.09716494845360825,
+    "recall": 0.5909090909090909,
+    "confusion_matrix_tn_fp_fn_tp": [
+      5666,
+      3503,
+      261,
+      377
+    ]
+  },
+  "rural_urban_code_subgroups": {
+    "1": {
+      "n": 3727,
+      "prevalence": 0.08934800107324926,
+      "recall_at_0_5": 0.7927927927927928,
+      "false_positive_rate_at_0_5": 0.6426045963464938
+    },
+    "2": {
+      "n": 6014,
+      "prevalence": 0.05021616228799468,
+      "recall_at_0_5": 0.3741721854304636,
+      "false_positive_rate_at_0_5": 0.23144257703081234
+    },
+    "6": {
+      "n": 34,
+      "prevalence": 0.058823529411764705,
+      "recall_at_0_5": 0.0,
+      "false_positive_rate_at_0_5": 0.0
+    },
+    "8": {
+      "n": 23,
+      "prevalence": 0.043478260869565216,
+      "recall_at_0_5": 0.0,
+      "false_positive_rate_at_0_5": 0.0
+    },
+    "9": {
+      "n": 9,
+      "prevalence": 0.0,
+      "recall_at_0_5": 0.0,
+      "false_positive_rate_at_0_5": 0.0
+    }
+  },
+  "source_csv_sha256": "df23b13d19c46e7974c90f36ad8d30034c9582986d7a4086676ce59b21d28809",
+  "limitations": [
+    "FARS includes fatal crashes only; this is not a model of crash occurrence or fatality risk among all road incidents.",
+    "The single-year chronological split is retrospective and has no external-year validation.",
+    "The 0.5 classification threshold is fixed and is not a calibrated operational threshold.",
+    "Coded crash records contain missing and special-value categories; subgroup rates are descriptive.",
+    "Associations are not causal and must not guide individual driving or enforcement decisions."
+  ],
+  "source_archive_sha256": "edde841eb493e55751961b36bac2d1ce8750f601cb8e6e183a525723bb62bab0"
+}
+
